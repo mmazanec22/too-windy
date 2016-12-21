@@ -7,6 +7,7 @@ import time
 # modify this to take a zip code arg rather than lat lon - need to use some converter
 
 
+
 # MAKE API CALL
 
 def return_data_from_api(url):
@@ -64,19 +65,16 @@ def exceed_limit():
 
 # RUN THE WHOLE THING
 
-all_data = get_all_data_by_lat_lon(sys.argv[1], sys.argv[2])
-# print to text file:
+# method to print to text file:
+  all_data = get_all_data_by_lat_lon(sys.argv[1], sys.argv[2])
   # current speed
   # highest speed before midnight tonight w/time
   # weather warnings
   # all speeds in next 24 hours w/times
 
-
-
-# return current speed
 # if we have not exceeded the 1000/day limit
-  # run the script
-  # if last API call was yesterday, reset date of last call
-  # add one to num of calls made today
-  # update last API call date
+  # run the method that prints to text file
+  # if last API call was yesterday, reset date of last call in tracker text file
+  # add one to num of calls made today in tracker text file
+  # update last API call date in tracker text file
 # else somehow return "Whoops, we exceeded the limit of our API!  Maybe send the dev some cash."
