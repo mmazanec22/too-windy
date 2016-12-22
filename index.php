@@ -33,7 +33,7 @@
       <input type="submit">
     </form>
 
-    <footer>Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky</a>.</footer>
+    <footer>Created by <a href="https://github.com/mmazanec22/too-windy">Melanie Mazanec</a>.  Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky</a>.</footer>
   </div>
 </body>
 </html>
