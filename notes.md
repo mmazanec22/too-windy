@@ -1,6 +1,4 @@
 # To Do
-* error message if not zip code
-* prevents > 1000 number of API calls/day
 * deploy to AWS
 * get zip code automatically based on user location
 * user can set what-is-too-windy level

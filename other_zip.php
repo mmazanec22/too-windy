@@ -22,6 +22,9 @@
         if($currentSpeed > 15.0){
           echo "<h1> Yes. </h1>";
         }
+        else if($currentSpeed == "!"){
+          echo "<h1> ! </h1>";
+        }
         else {
           echo "<h1> No. </h1>";
         }

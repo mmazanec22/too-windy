@@ -2,6 +2,8 @@ import requests
 import sys
 import time
 from pygeocoder import Geocoder
+from datetime import datetime
+from dateutil import parser
 
 
 
@@ -64,34 +66,31 @@ def get_highest_speed_before_midnight_with_time(all_data):
 
 
 
-# MAKE SURE LIMIT IS NOT EXCEEDED
-
-# track total_num_calls and date_last_call in a text file
-# if current call is different date, then clear the total num of API calls
-
-def exceed_limit():
-  if total_num_calls >= 1000:
-    return true
-  else:
-    return false
-
-
-
 # RUN THE WHOLE THING
 
-def print_to_file():
-  f = open('last_call_file.txt', 'r+')
+f = open('last_call_file.txt', 'r+')
+all_contents_array = f.read().split("\n")
+total_num_calls = int(all_contents_array[3])
+date_last_call = parser.parse(all_contents_array[4]).date()
+right_now = datetime.utcnow().date()
+
+if total_num_calls < 1000 or date_last_call < right_now:
   all_data = get_all_data(lat, lon)
   curr_speed = current_wind_speed(all_data)
   high_speed = get_highest_speed_before_midnight_with_time(all_data)
   warning = warnings(all_data)
-  f.write('{}\n{}\n{}\n'.format(curr_speed,high_speed,warning))
 
-print_to_file()
+  if date_last_call < right_now:
+    total_num_calls = 1
+  else:
+    total_num_calls = total_num_calls + 1
 
-# if we have not exceeded the 1000/day limit
-  # run the method that prints to text file
-  # if last API call was yesterday, reset date of last call in tracker text file
-  # add one to num of calls made today in tracker text file
-  # update last API call date in tracker text file
-# else somehow return "Whoops, we exceeded the limit of our API!  Maybe send the dev some cash."
+  date_last_call = right_now
+
+  f = open('last_call_file.txt', 'r+')
+  f.write('{}\n{}\n{}\n{}\n{}\n'.format(curr_speed,high_speed,warning,total_num_calls,date_last_call))
+
+else:
+  error_message = "Whoops, we exceeded the limit of the API!  Maybe send the dev some cash."
+  f = open('last_call_file.txt', 'r+')
+  f.write('{}\n{}\n{}\n{}\n{}\n'.format("!",error_message,"   ",total_num_calls,date_last_call))
