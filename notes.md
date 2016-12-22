@@ -11,3 +11,6 @@
 
 # How to start a PHP server on a Mac (since this info took me an hour to find)
 * php -S localhost:8000
+
+# How to activate the virtual env
+* source env/bin/activate
