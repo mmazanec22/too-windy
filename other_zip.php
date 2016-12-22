@@ -7,7 +7,7 @@
   <div class = "all-contents">
     <?php
     // run python script, get data from file into one string
-    exec('python3 get_local_wind_speed.py 60640');
+    exec('python3 get_local_wind_speed.py ' . $_GET["user-zip"]);
     $filename = "last_call_file.txt";
     $handle = fopen($filename, "r");
     $contents = fread($handle, filesize($filename));
@@ -32,6 +32,9 @@
       <input type="text" name="user-zip">
       <input type="submit">
     </form>
+
+    <br>
+    <br>
 
     <footer>Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky</a>.</footer>
   </div>
