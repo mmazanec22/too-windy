@@ -44,7 +44,7 @@ def warnings(all_data):
     return "No alerts for now!"
 
 def hourly_data(all_data):
-  return data['hourly']['data']
+  return all_data['hourly']['data']
 
 def get_day_from_hourly_record(input_record):
   return time.strftime('%d', time.localtime(input_record['time']))
@@ -77,12 +77,15 @@ def exceed_limit():
 
 # RUN THE WHOLE THING
 
-def print_to_file:
-  f = open('temp_file.txt', 'w')
+def print_to_file():
+  f = open('last_call_file.txt', 'r+')
   all_data = get_all_data(lat, lon)
-  print(current_wind_speed(all_data))
-  print(get_highest_speed_before_midnight_with_time(all_data))
-  print(warnings(all_data))
+  curr_speed = current_wind_speed(all_data)
+  high_speed = get_highest_speed_before_midnight_with_time(all_data)
+  warning = warnings(all_data)
+  f.write('{}\n{}\n{}\n'.format(curr_speed,high_speed,warning))
+
+print_to_file()
 
 # if we have not exceeded the 1000/day limit
   # run the method that prints to text file
