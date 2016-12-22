@@ -1,9 +1,10 @@
 <html>
 <head>
   <title>Is it too windy to bike today?</title>
+  <link rel="stylesheet" type="text/css" href="style.php"/>
 </head>
 <body>
-  <div>
+  <div class = "all-contents">
     <?php
     // run python script, get data from file into one string
     exec('python3 get_local_wind_speed.py 60640');
@@ -23,7 +24,9 @@
     else {
       echo "<h1> No. </h1>";
     }
+    echo "<h2>" . $strongestWindString . "</h2>";
     ?>
+    <footer>Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky</a>.</footer>
   </div>
   <!-- default home page: -->
     <!-- Want to know if it will be too windy to bike?  Enter your zip code. -->
@@ -32,6 +35,5 @@
     <!-- YES or NO -->
     <!-- The highest predicted wind speed between now and midnight for your zip code is  -->
     <!-- bookmark this page! -->
-  <footer>Powered by <a href="https://darksky.net/poweredby/">Dark Sky</a>.</footer>
 </body>
 </html>
