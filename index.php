@@ -6,12 +6,17 @@
 <body>
   <div class = "all-contents">
     <?php
+
+      $details = json_decode(file_get_contents("http://ipinfo.io/{$_SERVER['REMOTE_ADDR']}/json"));
+      echo "<h1> ". $details->postal ." </h1>";
+
       // run python script, get data from file into one string
       exec('python3 get_local_wind_speed.py 60640');
       $filename = "last_call_file.txt";
       $handle = fopen($filename, "r");
       $contents = fread($handle, filesize($filename));
       fclose($handle);
+
       // parse string into an array and assign variables
       $file_contents_array = explode("\n", $contents);
       $currentSpeed = $file_contents_array[0];
@@ -22,7 +27,7 @@
         echo "<h1> Yes. </h1>";
       }
       else if($currentSpeed == "!"){
-        echo "<h1> ! </h1>";
+        echo "<h1> ! </h1>"; // this is what the script passes for too many API
       }
       else {
         echo "<h1> No. </h1>";

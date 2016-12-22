@@ -1,6 +1,6 @@
-6.79
-The strongest wind in Chicago today will be 9.56 MPH at about 23:00.
+6.01
+The strongest wind in Chicago today will be 9.48 MPH at about 23:00.
 No alerts for now!
-6
+23
 2016-12-22
-19:11:14.089855
+-22

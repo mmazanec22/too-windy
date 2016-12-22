@@ -1,7 +1,11 @@
 # To Do
-* deploy to AWS
 * get zip code automatically based on user location
+* deploy to AWS or Heroku
 * user can set what-is-too-windy level
+* simplify PHP into partials
+* add favicon
+
+# Maybe
 * chart with hourly wind speed for rest of day
 * additional info-- "no but it might be too snowy"
 

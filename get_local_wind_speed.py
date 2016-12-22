@@ -6,14 +6,12 @@ from datetime import datetime
 from dateutil import parser
 
 
-
 # takes zip code as argument
 zip = sys.argv[1]
 coordinates = Geocoder.geocode(zip).coordinates
 lat = coordinates[0]
 lon = coordinates[1]
 city = Geocoder.geocode(zip).city
-
 
 
 # MAKE API CALL
@@ -33,7 +31,6 @@ def get_all_data(lat, lon):
     return data
   except:
     return "Do you even latitude and longitude, bro?"
-
 
 
 # PARSE DATA
@@ -63,7 +60,6 @@ def get_highest_speed_before_midnight_with_time(all_data):
       highest_speed = k['windSpeed']
       time_of_highest_speed = time.strftime('%H:%M', time.localtime(k['time']))
   return "The strongest wind in " + city + " today will be " + str(highest_speed) + " MPH at about " + time_of_highest_speed + "."
-
 
 
 # RUN THE WHOLE THING
