@@ -1,5 +1,4 @@
 # To Do
-* user can set what-is-too-windy level - sliding bar
 * simplify PHP into partials
 * get zip code automatically based on user location
 * add favicon

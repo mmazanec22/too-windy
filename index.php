@@ -11,7 +11,7 @@
       exec('python3 get_local_wind_speed.py 60640');
 
       // get data from file into one string
-      $filename = "last_call_file.txt";
+      $filename = "60640.txt";
       $handle = fopen($filename, "r");
       $contents = fread($handle, filesize($filename));
       fclose($handle);
@@ -20,7 +20,6 @@
       $file_contents_array = explode("\n", $contents);
       $currentSpeed = $file_contents_array[0];
       $strongestWindString = $file_contents_array[1];
-      $alerts = $file_contents_array[2];
 
       if($currentSpeed > 15.0){
         echo "<h1> Yes. </h1>";
@@ -54,6 +53,9 @@
     <br>
 
     <footer>Created by <a href="https://github.com/mmazanec22/too-windy">Melanie Mazanec</a>.  Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky</a>.</footer>
+    <?php
+      exec('python3 zip_code_file_cleanup.py');
+    ?>
   </div>
 </body>
 </html>

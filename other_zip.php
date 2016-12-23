@@ -9,12 +9,11 @@
       // check to see if zip code is valid
       if(strlen((int)$_GET["user-zip"]) == 5 && is_numeric($_GET["user-zip"])) {
 
-
         // run python script with input zip
-        exec('python3 get_local_wind_speed.py ' . $_GET["user-zip"]);
+        $foo = shell_exec('python3 get_local_wind_speed.py ' . $_GET["user-zip"]);
 
         // SAME AS INDEX FROM HERE...
-        $filename = "last_call_file.txt";
+        $filename = $_GET["user-zip"] . ".txt";
         $handle = fopen($filename, "r");
         $contents = fread($handle, filesize($filename));
         fclose($handle);
@@ -23,7 +22,6 @@
         $file_contents_array = explode("\n", $contents);
         $currentSpeed = (double)$file_contents_array[0];
         $strongestWindString = $file_contents_array[1];
-        $alerts = $file_contents_array[2];
         // TO HERE
 
         if($currentSpeed > (double)$_GET["mph"]){
@@ -62,6 +60,9 @@
     <br>
 
     <footer>Created by <a href="https://github.com/mmazanec22/too-windy">Melanie Mazanec</a>.  Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky</a>.</footer>
+    <?php
+      exec('python3 zip_code_file_cleanup.py');
+    ?>
   </div>
 </body>
 </html>

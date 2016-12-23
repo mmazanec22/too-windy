@@ -40,12 +40,6 @@ def get_all_data(lat, lon):
 def current_wind_speed(all_data):
   return all_data['hourly']['data'][0]['windSpeed']
 
-def warnings(all_data):
-  if 'alerts' in all_data:
-    return all_data['alerts']['title']
-  else:
-    return "No alerts for now!"
-
 def hourly_data(all_data):
   return all_data['hourly']['data']
 
@@ -75,17 +69,16 @@ def highest_speed_only(all_data):
 
 # RUN THE WHOLE THING
 
-f = open('last_call_file.txt', 'r+')
-all_contents_array = f.read().split("\n")
-total_num_calls = int(all_contents_array[3])
-date_last_call = parser.parse(all_contents_array[4]).date()
+tracker_file = open('api_call_tracker.txt', 'r')
+all_contents_array = tracker_file.read().split("\n")
+total_num_calls = int(all_contents_array[0])
+date_last_call = parser.parse(all_contents_array[1]).date()
 right_now = datetime.utcnow().date()
 
 if total_num_calls < 1000 or date_last_call < right_now:
   all_data = get_all_data(lat, lon)
   highest_speed = highest_speed_only(all_data)
   high_speed_string = get_highest_speed_before_midnight_with_time(all_data)
-  warning = warnings(all_data)
 
   if date_last_call < right_now:
     total_num_calls = 1
@@ -94,10 +87,13 @@ if total_num_calls < 1000 or date_last_call < right_now:
 
   date_last_call = right_now
 
-  f = open('last_call_file.txt', 'r+')
-  f.write('{}\n{}\n{}\n{}\n{}\n'.format(highest_speed,high_speed_string,warning,total_num_calls,date_last_call))
+  file_name = zip + ".txt"
+  f = open(file_name, 'w+')
+  f.write('{}\n{}\n'.format(highest_speed,high_speed_string))
+  tracker_file = open('api_call_tracker.txt', 'w')
+  tracker_file.write('{}\n{}\n'.format(total_num_calls,date_last_call))
 
 else:
   error_message = "Whoops, we exceeded the limit of the API!  Maybe send the dev some cash."
-  f = open('last_call_file.txt', 'r+')
+  f = open(file_name, 'w+')
   f.write('{}\n{}\n{}\n{}\n{}\n'.format("!",error_message,"   ",total_num_calls,date_last_call))
