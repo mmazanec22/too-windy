@@ -7,21 +7,28 @@
   <div class = "all-contents">
     <?php
       // check to see if zip code is valid
-      if(strlen($_GET["user-zip"]) == 5 && is_numeric($_GET["user-zip"])) {
+      $inputZip = str_replace(" ", "", $_GET["user-zip"]);
+      if(strlen($inputZip) == 5 && is_numeric($inputZip)) {
 
         // run python script with input zip
-        $foo = shell_exec('python3 get_local_wind_speed.py ' . $_GET["user-zip"]);
+        $foo = shell_exec('python3 get_local_wind_speed.py ' . $inputZip);
 
         // SAME AS INDEX FROM HERE...
-        $filename = $_GET["user-zip"] . ".txt";
-        $handle = fopen($filename, "r");
-        $contents = fread($handle, filesize($filename));
-        fclose($handle);
+        $filename = $inputZip . ".txt";
+        if(is_file($filename)){
+          $handle = fopen($filename, "r");
+          $contents = fread($handle, filesize($filename));
+          fclose($handle);
+          $file_contents_array = explode("\n", $contents);
+          $currentSpeed = (double)$file_contents_array[0];
+          $strongestWindString = $file_contents_array[1];
+        }
+        else{
+          $currentSpeed = "!";
+          $strongestWindString = "Do you even zip code, bro?";
+        }
 
         // parse string into an array and assign variables
-        $file_contents_array = explode("\n", $contents);
-        $currentSpeed = (double)$file_contents_array[0];
-        $strongestWindString = $file_contents_array[1];
         // TO HERE
 
         if($currentSpeed > (double)$_GET["mph"]){
