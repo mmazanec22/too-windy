@@ -6,7 +6,6 @@
 <body>
   <div class = "all-contents">
     <?php
-
       // check to see if zip code is valid
       if(strlen((int)$_GET["user-zip"]) == 5 && is_numeric($_GET["user-zip"])) {
 
@@ -22,12 +21,12 @@
 
         // parse string into an array and assign variables
         $file_contents_array = explode("\n", $contents);
-        $currentSpeed = $file_contents_array[0];
+        $currentSpeed = (double)$file_contents_array[0];
         $strongestWindString = $file_contents_array[1];
         $alerts = $file_contents_array[2];
         // TO HERE
 
-        if($currentSpeed > $_GET["mph"]){
+        if($currentSpeed > (double)$_GET["mph"]){
           echo "<h1> Yes. </h1>";
         }
         else if($currentSpeed == "!"){
@@ -55,7 +54,7 @@
       </div>
       <div>
         <br>
-        <input type="submit" value = "Check Zip">
+        <input type="submit" value = "Check Zip" class = "submit-button">
       </div>
     </form>
 

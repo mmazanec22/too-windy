@@ -46,7 +46,7 @@
       </div>
       <div>
         <br>
-        <input type="submit" value = "Check Zip">
+        <input type="submit" value = "Check Zip" class = "submit-button">
       </div>
     </form>
 

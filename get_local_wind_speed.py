@@ -61,7 +61,16 @@ def get_highest_speed_before_midnight_with_time(all_data):
     if k['windSpeed'] > highest_speed and current_day == get_day_from_hourly_record(k):
       highest_speed = k['windSpeed']
       time_of_highest_speed = time.strftime('%H:%M', time.localtime(k['time']))
-  return "The strongest wind in " + city + " today will be " + str(highest_speed) + " MPH at about " + time_of_highest_speed + "."
+  return "The strongest wind in " + city + " today will be " + str(highest_speed) + " mph at about " + time_of_highest_speed + "."
+
+def highest_speed_only(all_data):
+  todays_data = hourly_data(all_data)
+  highest_speed = 0.0
+  current_day = get_day_from_hourly_record(todays_data[0])
+  for k in todays_data:
+    if k['windSpeed'] > highest_speed and current_day == get_day_from_hourly_record(k):
+      highest_speed = k['windSpeed']
+  return str(highest_speed)
 
 
 # RUN THE WHOLE THING
@@ -74,8 +83,8 @@ right_now = datetime.utcnow().date()
 
 if total_num_calls < 1000 or date_last_call < right_now:
   all_data = get_all_data(lat, lon)
-  curr_speed = current_wind_speed(all_data)
-  high_speed = get_highest_speed_before_midnight_with_time(all_data)
+  highest_speed = highest_speed_only(all_data)
+  high_speed_string = get_highest_speed_before_midnight_with_time(all_data)
   warning = warnings(all_data)
 
   if date_last_call < right_now:
@@ -86,7 +95,7 @@ if total_num_calls < 1000 or date_last_call < right_now:
   date_last_call = right_now
 
   f = open('last_call_file.txt', 'r+')
-  f.write('{}\n{}\n{}\n{}\n{}\n'.format(curr_speed,high_speed,warning,total_num_calls,date_last_call))
+  f.write('{}\n{}\n{}\n{}\n{}\n'.format(highest_speed,high_speed_string,warning,total_num_calls,date_last_call))
 
 else:
   error_message = "Whoops, we exceeded the limit of the API!  Maybe send the dev some cash."
