@@ -1,8 +1,7 @@
 # To Do
-* get zip code automatically based on user location
-* deploy to AWS or Heroku
-* user can set what-is-too-windy level
+* user can set what-is-too-windy level - sliding bar
 * simplify PHP into partials
+* get zip code automatically based on user location
 * add favicon
 
 # Maybe

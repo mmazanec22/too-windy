@@ -7,9 +7,6 @@
   <div class = "all-contents">
     <?php
 
-      $details = json_decode(file_get_contents("http://ipinfo.io/{$_SERVER['REMOTE_ADDR']}/json"));
-      echo "<h1> ". $details->postal ." </h1>";
-
       // run python script, get data from file into one string
       exec('python3 get_local_wind_speed.py 60640');
       $filename = "last_call_file.txt";
