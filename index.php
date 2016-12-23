@@ -7,8 +7,10 @@
   <div class = "all-contents">
     <?php
 
-      // run python script, get data from file into one string
+      // run python script
       exec('python3 get_local_wind_speed.py 60640');
+
+      // get data from file into one string
       $filename = "last_call_file.txt";
       $handle = fopen($filename, "r");
       $contents = fread($handle, filesize($filename));
@@ -32,11 +34,24 @@
       echo "<h2>" . $strongestWindString . "</h2>";
     ?>
 
-    <form action="other_zip.php" method="get">
+    <form oninput="x.value=parseInt(mph.value)" action="other_zip.php" method="get">
+      <br>
       <label>Check another zip code: </label>
       <input type="text" name="user-zip">
-      <input type="submit">
+      <div class= "set-mph">
+        <br>
+        <label>How windy is too windy?</label>
+        <output name="x" for="mph" value = "15">15</output> mph
+        <input type="range" name="mph" min="10" max="30" value="15">
+      </div>
+      <div>
+        <br>
+        <input type="submit" value = "Check Zip">
+      </div>
     </form>
+
+    <br>
+    <br>
 
     <footer>Created by <a href="https://github.com/mmazanec22/too-windy">Melanie Mazanec</a>.  Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky</a>.</footer>
   </div>
