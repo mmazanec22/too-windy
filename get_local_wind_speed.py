@@ -4,6 +4,11 @@ import time
 from pygeocoder import Geocoder
 from datetime import datetime
 from dateutil import parser
+import os
+
+
+# env variable
+API_KEY = os.environ['API_KEY']
 
 
 # takes zip code as argument
@@ -23,10 +28,7 @@ def return_data_from_api(url):
 
 def get_all_data(lat, lon):
   try:
-    api_key = ""
-    with open('dark_sky_api_key.txt', 'r') as myfile:
-      api_key = myfile.read().replace('\n', '')
-    url = "https://api.darksky.net/forecast/" + api_key + "/" + str(lat) +"," + str(lon)
+    url = "https://api.darksky.net/forecast/" + API_KEY + "/" + str(lat) +"," + str(lon)
     data = return_data_from_api(url)
     return data
   except:
