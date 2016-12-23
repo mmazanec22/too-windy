@@ -7,7 +7,7 @@
   <div class = "all-contents">
     <?php
       // check to see if zip code is valid
-      if(strlen((int)$_GET["user-zip"]) == 5 && is_numeric($_GET["user-zip"])) {
+      if(strlen($_GET["user-zip"]) == 5 && is_numeric($_GET["user-zip"])) {
 
         // run python script with input zip
         $foo = shell_exec('python3 get_local_wind_speed.py ' . $_GET["user-zip"]);
