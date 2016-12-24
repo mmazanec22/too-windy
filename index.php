@@ -8,7 +8,7 @@
     <?php
 
       // run python script
-      exec('python3 get_local_wind_speed.py 60640');
+      exec('python3 scripts/get_local_wind_speed.py 60640');
 
       // get data from file into one string
       $filename = "60640.txt";
@@ -49,13 +49,10 @@
       </div>
     </form>
 
-    <br>
-    <br>
+    <div class="footer">
+      <?php include 'partials/footer.php'; ?>
+    </div>
 
-    <footer>Created by <a href="https://github.com/mmazanec22/too-windy">Melanie Mazanec</a>.  Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky</a>.</footer>
-    <?php
-      exec('python3 zip_code_file_cleanup.py');
-    ?>
   </div>
 </body>
 </html>

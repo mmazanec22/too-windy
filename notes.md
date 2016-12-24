@@ -6,9 +6,13 @@
 # Maybe
 * chart with hourly wind speed for rest of day
 * additional info-- "no but it might be too snowy"
+* "heat map" of windiest areas
 
 # How to start a PHP server on a Mac (since this info took me an hour to find)
 * php -S localhost:8000
 
 # How to activate the virtual env
 * source env/bin/activate
+
+# PHP partials
+* http://www.foilphp.it/docs/TEMPLATES/PARTIALS.html

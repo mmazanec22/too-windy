@@ -11,9 +11,8 @@
       if(strlen($inputZip) == 5 && is_numeric($inputZip)) {
 
         // run python script with input zip
-        $foo = shell_exec('python3 get_local_wind_speed.py ' . $inputZip);
+        exec('python3 scripts/get_local_wind_speed.py ' . $inputZip);
 
-        // SAME AS INDEX FROM HERE...
         $filename = $inputZip . ".txt";
         if(is_file($filename)){
           $handle = fopen($filename, "r");
@@ -29,7 +28,6 @@
         }
 
         // parse string into an array and assign variables
-        // TO HERE
 
         if($currentSpeed > (double)$_GET["mph"]){
           echo "<h1> Yes. </h1>";
@@ -63,13 +61,10 @@
       </div>
     </form>
 
-    <br>
-    <br>
+    <div class="footer">
+      <?php include 'partials/footer.php'; ?>
+    </div>
 
-    <footer>Created by <a href="https://github.com/mmazanec22/too-windy">Melanie Mazanec</a>.  Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky</a>.</footer>
-    <?php
-      exec('python3 zip_code_file_cleanup.py');
-    ?>
   </div>
 </body>
 </html>
