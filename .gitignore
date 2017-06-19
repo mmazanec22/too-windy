@@ -1,1 +1,2 @@
-dark_sky_api_key.txt
+instance/*
+.env
