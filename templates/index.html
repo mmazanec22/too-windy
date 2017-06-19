@@ -1,11 +1,10 @@
 <!doctype html>
 <title>Is it too windy to bike today?</title>
-<link rel="stylesheet" type="text/css" href="style.php"/>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 <div class=page>
     <h2 class="page-title">Is it too windy to bike to work today?</h1>
     <div class="answer">
-    {% if current_speed > 15.0 %}
+    {% if high_speed > 15.0 %}
         <h1> Yes. </h1>
     {% else %}
         <h1> No. </h1>
